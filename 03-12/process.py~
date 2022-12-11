@@ -1,0 +1,9 @@
+f = open('input.txt', 'r')
+
+inputArray = []
+scoreTally = 0
+
+for line in f.readlines():
+    inputArray.append(line)
+
+print(inputArray[0])

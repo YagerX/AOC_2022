@@ -1,0 +1,48 @@
+f = open('input.txt', 'r')
+
+inputArray = []
+head = knot(0,0)
+tail = knot(0,0)
+tailTrail = ["0,0"]
+
+class knot:
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+        
+for line in f:
+    inputArray.append(line[0:-1].split())
+
+def moveHead(move):
+    direc=move[0]
+    dist = int(move[1])
+    for i in range(dist):
+        if direc == "U":
+            head.y += 1
+        elif direc == "D":
+            head.y -= 1
+        elif direc == "L":
+            head.x -= 1
+        elif direc == "R":
+            head.x += 1
+        moveTail()
+
+def moveTail():
+    if tail.x == head.x and tail.y == head.y:
+        return
+    if tail.x < head.x -1:
+        tail.x += 1
+    elif tail.x > head.x +1:
+        tail.x -= 1
+    if tail.y < head.y -1:
+        tail.y += 1
+    elif tail.y > head.y +1:
+        tail.y -= 1
+    tailPos = str(tail.x) + "," + str(tail.y)
+    if tailTrail.count(tailPos) == 0:
+        tailTrail.append(tailPos)
+
+for move in inputArray:
+    moveHead(move)
+
+print(len(tailTrail))

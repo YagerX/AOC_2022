@@ -1,0 +1,33 @@
+f = open('input.txt', 'r')
+
+inputArray = []
+elfContains = 0
+
+for rawline in f:
+    line = rawline.strip()
+    elf1 = [0,0]
+    elf2 = [0,0]
+    split = line.split(",")
+    rawElf1= split[0].split("-")
+    rawElf2= split[1].split("-")
+    elf1 = [int(rawElf1[0]),int(rawElf1[1])]
+    elf2 = [int(rawElf2[0]),int(rawElf2[1])]
+    inputArray.append([elf1,elf2])
+print(len(inputArray))
+
+count = 0
+for pair in inputArray:
+    print("pair:", count)
+    elf1 = pair[0]
+    elf2 = pair[1]
+    print(elf1, elf2)
+    if elf1[0] <= elf2[0] and elf1[1] >= elf2[1]:
+        print("Elf 1 contains Elf 2")
+        elfContains += 1
+    if elf1[0] >= elf2[0] and elf1[1] <= elf2[1]:
+        print("Elf 2 contains Elf 1")
+        elfContains += 1
+    print(elfContains)
+    count += 1
+    
+print(elfContains)

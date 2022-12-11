@@ -1,0 +1,7 @@
+f = open('input.txt', 'r')
+
+inputArray = []
+
+for line in f:
+    inputArray.append(line[0:-1])
+    print line

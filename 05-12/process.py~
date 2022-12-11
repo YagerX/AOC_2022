@@ -1,0 +1,53 @@
+f = open('input.txt', 'r')
+
+inputArray = []
+boxStack = []
+moveList=[]
+initialHeight = 8
+
+for line in f:
+    inputArray.append(line[0:-1])
+
+
+def generateStack():
+    for x in range(9):
+        boxStack.append([])
+    for x in range(initialHeight):
+        for y in range(9):
+            if inputArray[initialHeight-x-1][y*4 + 1] != ' ':
+                boxStack[y].append(inputArray[initialHeight-x-1][y*4 + 1])
+
+def generateMoveList():
+    for x in range(10, len(inputArray)):
+        moveList.append(inputArray[x].split()[1::2])
+
+def moveCrates(move):
+    moves = int(move[0])
+    origin = int(move[1])
+    dest = int(move[2])
+    print(moves,origin,dest)
+    for x in range(int(move[0])):
+        print("Moving a box!")
+
+def printStack():
+    maxLen = 0
+    stackStr = []
+    for x in range(9):
+        if len(boxStack[x]) > maxLen:
+            maxLen = len(boxStack[x])
+    for y in range(maxLen):
+        line = ""
+        for z in range(9):
+            if y < len(boxStack[z]):
+                line += boxStack[z][y]
+            else:
+                line += " "
+        stackStr.append(line)
+    for i in range(len(stackStr)):
+        print(stackStr.pop())
+
+generateStack()
+generateMoveList()
+moveCrates(moveList[0])
+printStack()
+

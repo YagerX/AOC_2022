@@ -1,0 +1,35 @@
+from collections import Counter
+f = open('input.txt', 'r')
+
+inputArray = []
+priorityList = [" ","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+
+pointsTally = 0
+gpPointsTally = 0
+
+for line in f.readlines():
+
+    highestScore = 0
+    inputArray.append(line)
+    
+    compartmentSize = int((len(line)-1)/2)
+    cmpt1 = line[0:compartmentSize]
+    cmpt2 = line[compartmentSize:len(line)]
+    for char in cmpt1:
+        if(cmpt2.__contains__(char)):
+            letterScore = priorityList.index(char)
+            if letterScore > highestScore:
+                highestScore = letterScore
+    pointsTallby += highestScore
+
+for group in range(0,int(len(inputArray)/3)):
+    line1=inputArray[group*3]
+    line2=inputArray[group*3+1]
+    line3=inputArray[group*3+2]
+    groupLetter = " "
+    for char in line1:
+        if line2.__contains__(char) and line3.__contains__(char) and char != '\n':
+            groupLetter = char
+    print("Group:", group, "Group Letter:", groupLetter)
+    gpPointsTally += priorityList.index(groupLetter)
+print(gpPointsTally)
